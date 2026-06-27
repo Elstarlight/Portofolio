@@ -46,7 +46,7 @@ const PROJECTS = [
     subtitle: "Project Akhir SMK",
     type: "game",
     typeLabel: "Game",
-    mode: "collabg",
+    mode: "collab",
     image: "assets/images/project-submitted.png",
     link: "https://github.com/username/submitted",
     desc: "Proyek game pendek yang dikembangkan secara kolaboratif bersama Tim Tugas Akhir. Di sini, saya bertanggung jawab penuh atas implementasi logika program (programming) dan seluruh produksi audio."
