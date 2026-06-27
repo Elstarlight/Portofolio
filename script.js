@@ -95,30 +95,37 @@ const CERTIFICATES = [
     credentialUrl: ""
   },
   {
-    title: "Sertifikat Kompetensi RPL",
-    issuer: "Uji Kompetensi Keahlian (UKK) SMK",
-    year: "2026",
-    images: ["assets/images/cert-ukk-rpl.jpg", "assets/images/cert-ukk-rpl-lampiran.jpg"],
+    title: "Sertifikat ITCC2023",
+    issuer: "Himpunan Mahasiswa Teknologi Informasi",
+    year: "2023",
+    images: ["assets/images/ITCC2023.jpg"],
     credentialUrl: ""
   },
   {
-    title: "Sertifikat Pelatihan Game Development",
-    issuer: "Nama Platform/Penyelenggara Kursus",
-    year: "2025",
-    images: ["assets/images/cert-game-dev.jpg"],
+    title: "Sertifikat Codefavour 5.0",
+    issuer: "Stempeddia & Kodekiddo",
+    year: "2024",
+    images: ["assets/images/Codefavour.jpg"],
     credentialUrl: ""
-  }
+  },
+  {
+    title: "Sertifikat Gecofest2023",
+    issuer: "Unika Soegijapranata",
+    year: "2026",
+    images: ["assets/images/Gecofest2023.jpeg"],
+    credentialUrl: ""
+  },
 ];
 
 const SOCIALS = [
   {
     name: "Instagram",
-    url: "https://instagram.com/username",
+    url: "https://www.instagram.com/maximillianmikhael07",
     icon: `<svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.7" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="7" r="1" fill="currentColor"/></svg>`
   },
   {
     name: "GitHub",
-    url: "https://github.com/username",
+    url: "https://github.com/Elstarlight",
     icon: `<svg viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.64-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.55 9.55 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.75c0 .26.18.57.69.48A10 10 0 0 0 12 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>`
   },
   {
@@ -128,12 +135,12 @@ const SOCIALS = [
   },
   {
     name: "Twitter / X",
-    url: "https://x.com/username",
+    url: "https://x.com/Naelhussein07",
     icon: `<svg viewBox="0 0 24 24" fill="none"><path d="M4 4l16 16M20 4 4 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`
   },
   {
     name: "Facebook",
-    url: "https://facebook.com/username",
+    url: "https://www.facebook.com/share/1DS9PWsive",
     icon: `<svg viewBox="0 0 24 24" fill="none"><path d="M14 8.5h2.5V5.5H14c-1.93 0-3.5 1.57-3.5 3.5v2H8.5v3H10.5v8h3v-8h2.3l.7-3H13.5v-2c0-.28.22-.5.5-.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>`
   }
 ];
