@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maximillian Mikhael — Portfolio</title>
+<meta name="description" content="Portfolio Maximillian Mikhael — Game, Web, dan Audio Developer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="#top" class="navbar__brand">MM<span class="navbar__brand-dot">.</span></a>
+      <nav class="navbar__links">
+        <a href="#about" data-nav>Biodata</a>
+        <a href="#skills" data-nav>Keahlian</a>
+        <a href="#projects" data-nav>Proyek</a>
+        <a href="#contact" data-nav>Kontak</a>
+      </nav>
+      <button class="navbar__toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="navbar__mobile" id="navMobile">
+      <a href="#about" data-nav>Biodata</a>
+      <a href="#skills" data-nav>Keahlian</a>
+      <a href="#projects" data-nav>Proyek</a>
+      <a href="#contact" data-nav>Kontak</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ===== HERO / BIODATA ===== -->
+    <section class="hero" id="about">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="hero__inner reveal">
+
+        <div class="hero__card">
+          <div class="hero__photo-wrap">
+            <img src="assets/images/profile.jpg" alt="Foto profil Maximillian Mikhael" class="hero__photo" id="profileImg">
+            <div class="hero__photo-fallback" id="profileFallback" aria-hidden="true">MM</div>
+          </div>
+
+          <div class="hero__status">
+            <span class="status-dot" aria-hidden="true"></span>
+            Sedang menjalani PKL
+          </div>
+        </div>
+
+        <div class="hero__content">
+          <p class="eyebrow">Halo, perkenalkan saya</p>
+          <h1 class="hero__name">Maximillian<br>Mikhael</h1>
+
+          <p class="hero__desc">
+            Lulusan SMK jurusan Rekayasa Perangkat Lunak (RPL) yang tertarik di dunia
+            pengembangan <em>game</em>, <em>web</em>, dan produksi audio. Saat ini sedang
+            menjalani Praktik Kerja Lapangan (PKL) sambil terus membangun proyek-proyek
+            kecil untuk belajar dan mengasah kemampuan.
+          </p>
+
+          <dl class="hero__meta">
+            <div class="hero__meta-item">
+              <dt>Pendidikan</dt>
+              <dd>SMK — Rekayasa Perangkat Lunak (RPL)</dd>
+            </div>
+            <div class="hero__meta-item">
+              <dt>Domisili</dt>
+              <dd>Kudus, Jawa Tengah, Indonesia</dd>
+            </div>
+            <div class="hero__meta-item">
+              <dt>Status saat ini</dt>
+              <dd>Peserta PKL — belum memiliki pengalaman kerja formal</dd>
+            </div>
+          </dl>
+
+          <div class="hero__actions">
+            <a href="#projects" class="btn btn--primary">Lihat Proyek Saya</a>
+            <a href="#contact" class="btn btn--ghost">Hubungi Saya</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section class="section" id="skills">
+      <div class="section__inner reveal">
+        <p class="eyebrow">Apa yang saya kuasai</p>
+        <h2 class="section__title">Keahlian</h2>
+        <p class="section__lead">
+          Masih dalam proses belajar, berikut gambaran kasar level kenyamanan saya
+          di setiap bidang berdasarkan jam terbang mengerjakan proyek pribadi dan tugas sekolah.
+        </p>
+
+        <div class="skills-grid" id="skillsGrid">
+          <!-- diisi oleh script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section class="section section--alt" id="projects">
+      <div class="section__inner reveal">
+        <p class="eyebrow">Hasil belajar saya</p>
+        <h2 class="section__title">Proyek</h2>
+        <p class="section__lead">
+          Kumpulan proyek yang pernah saya kerjakan, baik sendiri maupun bersama tim,
+          sebagai bagian dari proses belajar membangun sesuatu dari nol.
+        </p>
+
+        <div class="project-filter" id="projectFilter">
+          <button class="filter-btn is-active" data-filter="all">Semua</button>
+          <button class="filter-btn" data-filter="game">Game</button>
+          <button class="filter-btn" data-filter="web">Web</button>
+          <button class="filter-btn" data-filter="audio">Audio</button>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+          <!-- diisi oleh script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section contact" id="contact">
+      <div class="section__inner reveal">
+        <p class="eyebrow">Mari terhubung</p>
+        <h2 class="section__title">Kontak</h2>
+        <p class="section__lead">
+          Terbuka untuk kesempatan magang, kolaborasi proyek kecil, atau sekadar
+          ngobrol soal game dan development. Silakan hubungi melalui salah satu cara di bawah.
+        </p>
+
+        <div class="contact-grid">
+          <a class="contact-card" href="mailto:maximillian.mikhael@email.com">
+            <span class="contact-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 6.5C3 5.67 3.67 5 4.5 5h15c.83 0 1.5.67 1.5 1.5v11c0 .83-.67 1.5-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-11Z" stroke="currentColor" stroke-width="1.6"/><path d="M4 6.5l8 6.5 8-6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="contact-card__text">
+              <strong>Email</strong>
+              <span>maximillian.mikhael@email.com</span>
+            </span>
+          </a>
+
+          <a class="contact-card" href="https://wa.me/6280000000000" target="_blank" rel="noopener noreferrer">
+            <span class="contact-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 3a9 9 0 0 0-7.74 13.6L3 21l4.55-1.19A9 9 0 1 0 12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 9.5c0 4 3 6 6 6 .9 0 1-1 .6-2-.3-.6-.8-.5-1.3-.3-.4.1-.9-.1-1.5-.7-.6-.6-.8-1.1-.7-1.5.2-.5.3-1-.3-1.3-1-.4-2-.3-2 .6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="contact-card__text">
+              <strong>WhatsApp</strong>
+              <span>Chat langsung</span>
+            </span>
+          </a>
+        </div>
+
+        <div class="socials" id="socials">
+          <!-- diisi oleh script.js -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> Maximillian Mikhael. Dibuat dengan rasa ingin tahu dan secangkir kopi.</p>
+    <a href="#top" class="footer__top">Kembali ke atas ↑</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
