@@ -864,13 +864,18 @@ button { font-family: inherit; }
   gap: 14px;
   align-items: center;
 }
+
 .lightbox__content img {
   max-width: 100%;
-  max-height: 74vh;
+  max-height: 70vh;
   width: auto;
   border-radius: var(--radius-md);
   box-shadow: 0 24px 60px rgba(0,0,0,0.35);
   background: var(--surface);
+  /* Gambar bebas dipakai untuk pinch-zoom & pan bawaan browser.
+     Navigasi antar gambar HANYA lewat tombol di bawah, jadi tidak ada
+     konflik gesture sama sekali. */
+  touch-action: pinch-zoom pan-x pan-y;
 }
 .lightbox__content figcaption {
   color: var(--bg);
@@ -896,18 +901,24 @@ button { font-family: inherit; }
   align-items: center;
   justify-content: center;
   transition: background .2s var(--ease), transform .2s var(--ease);
+  z-index: 5;
 }
 .lightbox__close:hover {
   background: rgba(255,255,255,0.18);
   transform: scale(1.06);
 }
 
+/* --- Baris navigasi DI BAWAH gambar — dipakai sama persis di PC dan HP --- */
+.lightbox__nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+}
+
 .lightbox__nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1.5px solid rgba(255,255,255,0.3);
   background: rgba(255,255,255,0.08);
@@ -917,20 +928,12 @@ button { font-family: inherit; }
   align-items: center;
   justify-content: center;
   transition: background .2s var(--ease), transform .2s var(--ease);
+  flex-shrink: 0;
 }
-.lightbox__nav svg { width: 22px; height: 22px; }
+.lightbox__nav svg { width: 20px; height: 20px; }
 .lightbox__nav:hover {
   background: rgba(255,255,255,0.18);
 }
-.lightbox__nav--prev {
-  left: 18px;
-  transform: translateY(-50%);
-}
-.lightbox__nav--prev:hover { transform: translateY(-50%) translateX(-2px); }
-.lightbox__nav--next {
-  right: 18px;
-}
-.lightbox__nav--next:hover { transform: translateY(-50%) translateX(2px); }
 
 .lightbox__counter {
   font-family: var(--font-mono);
@@ -938,12 +941,30 @@ button { font-family: inherit; }
   color: var(--bg);
   opacity: 0.7;
   letter-spacing: 0.04em;
+  min-width: 48px;
+  text-align: center;
 }
 
-@media (max-width: 600px) {
-  .lightbox__nav { width: 40px; height: 40px; }
-  .lightbox__nav--prev { left: 8px; }
-  .lightbox__nav--next { right: 8px; }
+/* Sembunyikan tombol & counter via JS saat sertifikat cuma punya 1 gambar */
+.lightbox__nav.is-hidden,
+.lightbox__counter.is-hidden {
+  display: none !important;
+}
+
+@media (max-width: 640px) {
+  .lightbox {
+    padding: 18px 14px;
+  }
+  .lightbox__close {
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+  }
+  .lightbox__nav {
+    width: 42px;
+    height: 42px;
+  }
 }
 
 /* =========================================================

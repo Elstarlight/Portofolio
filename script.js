@@ -88,8 +88,8 @@ const PROJECTS = [
    kalau mau bisa digeser kiri/kanan di lightbox (misal halaman depan & belakang). */
 const CERTIFICATES = [
   {
-    title: "Sertifikat Praktik Kerja Lapangan",
-    issuer: "Nama Perusahaan/Instansi PKL",
+    title: "Sertifikat Fullstack Web Developer",
+    issuer: "Dicoding X DBS Foundation 2026",
     year: "2026",
     images: ["assets/images/Codingcamp20261.png", "assets/images/Codingcamp20262.png"],
     credentialUrl: ""
@@ -273,8 +273,8 @@ function setupCertLightbox() {
   const img = document.getElementById("certLightboxImg");
   const caption = document.getElementById("certLightboxCaption");
   const closeBtn = document.getElementById("certLightboxClose");
-  const prevBtn = document.getElementById("certLightboxPrev");
-  const nextBtn = document.getElementById("certLightboxNext");
+  const prevBtns = document.querySelectorAll("[data-cert-prev]");
+  const nextBtns = document.querySelectorAll("[data-cert-next]");
   const counter = document.getElementById("certLightboxCounter");
   if (!lightbox || !img || !caption || !closeBtn) return;
 
@@ -292,10 +292,12 @@ function setupCertLightbox() {
     caption.textContent = `${c.title} — ${c.issuer} (${c.year})`;
 
     const showNav = total > 1;
-    if (prevBtn) prevBtn.style.display = showNav ? "flex" : "none";
-    if (nextBtn) nextBtn.style.display = showNav ? "flex" : "none";
+
+    prevBtns.forEach(b => b.classList.toggle("is-hidden", !showNav));
+    nextBtns.forEach(b => b.classList.toggle("is-hidden", !showNav));
+
     if (counter) {
-      counter.style.display = showNav ? "block" : "none";
+      counter.classList.toggle("is-hidden", !showNav);
       counter.textContent = `${currentImgIndex + 1} / ${total}`;
     }
   }
@@ -337,31 +339,19 @@ function setupCertLightbox() {
   });
 
   closeBtn.addEventListener("click", closeLightbox);
-  prevBtn?.addEventListener("click", (e) => { e.stopPropagation(); goPrev(); });
-  nextBtn?.addEventListener("click", (e) => { e.stopPropagation(); goNext(); });
+  prevBtns.forEach(b => b.addEventListener("click", (e) => { e.stopPropagation(); goPrev(); }));
+  nextBtns.forEach(b => b.addEventListener("click", (e) => { e.stopPropagation(); goNext(); }));
 
   lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox) closeLightbox();
   });
 
+  // Navigasi keyboard tetap didukung untuk pengguna desktop (opsional, tidak mengganggu zoom)
   document.addEventListener("keydown", (e) => {
     if (!lightbox.classList.contains("is-open")) return;
     if (e.key === "Escape") closeLightbox();
     if (e.key === "ArrowLeft") goPrev();
     if (e.key === "ArrowRight") goNext();
-  });
-
-  // Swipe geser di mobile/touch
-  let touchStartX = 0;
-  lightbox.addEventListener("touchstart", (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
-  lightbox.addEventListener("touchend", (e) => {
-    const touchEndX = e.changedTouches[0].screenX;
-    const diff = touchEndX - touchStartX;
-    if (Math.abs(diff) < 40) return;
-    if (diff > 0) goPrev();
-    else goNext();
   });
 }
 
