@@ -50,34 +50,62 @@ const PROJECTS = [
     image: "assets/images/project-submitted.png",
     link: "https://github.com/username/submitted",
     desc: "Proyek game pendek yang dikembangkan secara kolaboratif bersama Tim Tugas Akhir. Di sini, saya bertanggung jawab penuh atas implementasi logika program (programming) dan seluruh produksi audio."
-  }//,
-//   {
-//     title: "Portal Sekolah Digital",
-//     type: "web",
-//     typeLabel: "Web",
-//     mode: "collab",
-//     image: "assets/images/project-portal-sekolah.jpg",
-//     link: "https://github.com/username/portal-sekolah",
-//     desc: "Contoh deskripsi: website informasi sekolah dengan sistem pengumuman dan galeri kegiatan, dikerjakan bersama 2 rekan tim."
-//   },
-//   {
-//     title: "Ambient Loop Pack",
-//     type: "audio",
-//     typeLabel: "Audio",
-//     mode: "solo",
-//     image: "assets/images/project-ambient-loop.jpg",
-//     link: "https://soundcloud.com/username/sets/ambient-loop-pack",
-//     desc: "Contoh deskripsi: kumpulan musik latar ambient pendek untuk kebutuhan game indie, dibuat sebagai latihan sound design."
-//   },
-//   {
-//     title: "Tugas Akhir RPL",
-//     type: "web",
-//     typeLabel: "Web",
-//     mode: "collab",
-//     image: "assets/images/project-tugas-akhir.jpg",
-//     link: "https://github.com/username/tugas-akhir-rpl",
-//     desc: "Contoh deskripsi: aplikasi manajemen data sederhana sebagai proyek akhir kelulusan SMK, dikerjakan berkelompok."
-//   }
+  }
+  // ,
+  // {
+  //   title: "Portal Sekolah Digital",
+  //   type: "web",
+  //   typeLabel: "Web",
+  //   mode: "collab",
+  //   image: "assets/images/project-portal-sekolah.jpg",
+  //   link: "https://github.com/username/portal-sekolah",
+  //   desc: "Contoh deskripsi: website informasi sekolah dengan sistem pengumuman dan galeri kegiatan, dikerjakan bersama 2 rekan tim."
+  // },
+  // {
+  //   title: "Ambient Loop Pack",
+  //   type: "audio",
+  //   typeLabel: "Audio",
+  //   mode: "solo",
+  //   image: "assets/images/project-ambient-loop.jpg",
+  //   link: "https://soundcloud.com/username/sets/ambient-loop-pack",
+  //   desc: "Contoh deskripsi: kumpulan musik latar ambient pendek untuk kebutuhan game indie, dibuat sebagai latihan sound design."
+  // },
+  // {
+  //   title: "Tugas Akhir RPL",
+  //   type: "web",
+  //   typeLabel: "Web",
+  //   mode: "collab",
+  //   image: "assets/images/project-tugas-akhir.jpg",
+  //   link: "https://github.com/username/tugas-akhir-rpl",
+  //   desc: "Contoh deskripsi: aplikasi manajemen data sederhana sebagai proyek akhir kelulusan SMK, dikerjakan berkelompok."
+  // }
+];
+
+/* Sertifikat — letakkan file gambar di assets/images/, lalu isi data di bawah.
+   "issuer" = lembaga/penyelenggara, "year" = tahun didapat. Field "credentialUrl"
+   bersifat opsional: kalau diisi, akan muncul tombol "Verifikasi" di lightbox. */
+const CERTIFICATES = [
+  {
+    title: "Sertifikat Praktik Kerja Lapangan",
+    issuer: "Nama Perusahaan/Instansi PKL",
+    year: "2026",
+    image: "assets/images/cert-pkl.jpg",
+    credentialUrl: ""
+  },
+  {
+    title: "Sertifikat Kompetensi RPL",
+    issuer: "Uji Kompetensi Keahlian (UKK) SMK",
+    year: "2026",
+    image: "assets/images/cert-ukk-rpl.jpg",
+    credentialUrl: ""
+  },
+  {
+    title: "Sertifikat Pelatihan Game Development",
+    issuer: "Nama Platform/Penyelenggara Kursus",
+    year: "2025",
+    image: "assets/images/cert-game-dev.jpg",
+    credentialUrl: ""
+  }
 ];
 
 const SOCIALS = [
@@ -135,22 +163,24 @@ function renderSkills() {
    3. RENDER PROJECTS
 --------------------------------------------------------- */
 
-// Ditambahkan LINK_ICON eksternal agar badge "Lihat Proyek" tidak error
 const LINK_ICON = `<svg viewBox="0 0 24 24" fill="none" width="14" height="14" style="display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+const ZOOM_ICON = `<svg viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.2 15.2 20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M10.5 8v5M8 10.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`;
 
 const MODE_ICON = {
   solo: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
   collab: `<svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8" r="2.8" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="9" r="2.3" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19c0-3 2.3-5.2 5-5.2s5 2.2 5 5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14.5 14.3c2.2.2 3.8 1.9 3.8 4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
-  // Ikon penunjang fallback thumbnail proyek berdasarkan tipenya
   game: `<svg viewBox="0 0 24 24" fill="none"><path d="M7 9h2m-1-1v2m6-1h.01M17 9h.01M6 14h12a3 3 0 0 0 3-3V9a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2a3 3 0 0 0 3 3Z" stroke="currentColor" stroke-width="1.6"/><path d="M5 14l-1.2 5.4a1.5 1.5 0 0 0 2.6 1.3L8 18h8l1.6 2.7a1.5 1.5 0 0 0 2.6-1.3L19 14" stroke="currentColor" stroke-width="1.6"/></svg>`,
   web: `<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4.5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 8.5h18" stroke="currentColor" stroke-width="1.6"/></svg>`,
   audio: `<svg viewBox="0 0 24 24" fill="none"><path d="M9 18V6l9-2v12" stroke="currentColor" stroke-width="1.6"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.6"/><circle cx="15" cy="16" r="3" stroke="currentColor" stroke-width="1.6"/></svg>`
 };
 
+const CERT_FALLBACK_ICON = `<svg viewBox="0 0 24 24" fill="none"><path d="M8 3h8a2 2 0 0 1 2 2v9.5a2 2 0 0 1-2 2h-2.2L12 21l-1.8-4.5H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.5 7.5h7M8.5 10.5h7M8.5 13.5h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+
 function renderProjects() {
   const grid = document.getElementById("projectsGrid");
   if (!grid) return;
-  
+
   grid.innerHTML = PROJECTS.map((p, i) => {
     const Tag = p.link ? "a" : "div";
     const linkAttrs = p.link ? `href="${p.link}" target="_blank" rel="noopener noreferrer"` : "";
@@ -179,21 +209,7 @@ function renderProjects() {
   }).join("");
 
   setupFilter();
-  setupProjectThumbs();
-}
-
-function setupProjectThumbs() {
-  document.querySelectorAll(".project-card__thumb img").forEach(img => {
-    const showFallback = () => {
-      img.style.display = "none";
-      img.previousElementSibling?.classList?.add("is-shown");
-    };
-    if (!img.getAttribute("src")) {
-      showFallback();
-      return;
-    }
-    img.addEventListener("error", showFallback);
-  });
+  setupImageFallback(".project-card__thumb img");
 }
 
 function setupFilter() {
@@ -215,7 +231,74 @@ function setupFilter() {
 }
 
 /* ---------------------------------------------------------
-   4. RENDER SOCIALS
+   4. RENDER CERTIFICATES + LIGHTBOX
+--------------------------------------------------------- */
+
+function renderCertificates() {
+  const grid = document.getElementById("certificatesGrid");
+  if (!grid) return;
+
+  grid.innerHTML = CERTIFICATES.map((c, i) => `
+    <button type="button" class="cert-card" data-cert-index="${i}">
+      <span class="cert-card__thumb">
+        <img src="${c.image || ''}" alt="Sertifikat ${c.title}" loading="lazy">
+        <span class="cert-card__thumb-fallback" data-fallback>${CERT_FALLBACK_ICON}</span>
+        <span class="cert-card__zoom-hint">${ZOOM_ICON} Perbesar</span>
+      </span>
+      <span class="cert-card__body">
+        <span class="cert-card__title">${c.title}</span>
+        <span class="cert-card__issuer">${c.issuer}</span>
+        <span class="cert-card__year">${c.year}</span>
+      </span>
+    </button>
+  `).join("");
+
+  setupImageFallback(".cert-card__thumb img");
+  setupCertLightbox();
+}
+
+function setupCertLightbox() {
+  const lightbox = document.getElementById("certLightbox");
+  const img = document.getElementById("certLightboxImg");
+  const caption = document.getElementById("certLightboxCaption");
+  const closeBtn = document.getElementById("certLightboxClose");
+  if (!lightbox || !img || !caption || !closeBtn) return;
+
+  function openLightbox(index) {
+    const c = CERTIFICATES[index];
+    if (!c) return;
+    img.src = c.image || "";
+    img.alt = `Sertifikat ${c.title}`;
+    caption.textContent = `${c.title} — ${c.issuer} (${c.year})`;
+    lightbox.classList.add("is-open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("is-open");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll(".cert-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const idx = parseInt(card.dataset.certIndex, 10);
+      openLightbox(idx);
+    });
+  });
+
+  closeBtn.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lightbox.classList.contains("is-open")) closeLightbox();
+  });
+}
+
+/* ---------------------------------------------------------
+   5. RENDER SOCIALS
 --------------------------------------------------------- */
 
 function renderSocials() {
@@ -229,14 +312,33 @@ function renderSocials() {
 }
 
 /* ---------------------------------------------------------
-   5. PROFILE PHOTO FALLBACK
+   6. IMAGE FALLBACK (shared helper untuk project & sertifikat)
+--------------------------------------------------------- */
+
+function setupImageFallback(selector) {
+  document.querySelectorAll(selector).forEach(img => {
+    const showFallback = () => {
+      img.style.display = "none";
+      const fallback = img.parentElement?.querySelector("[data-fallback]");
+      fallback?.classList?.add("is-shown");
+    };
+    if (!img.getAttribute("src")) {
+      showFallback();
+      return;
+    }
+    img.addEventListener("error", showFallback);
+  });
+}
+
+/* ---------------------------------------------------------
+   7. PROFILE PHOTO FALLBACK
 --------------------------------------------------------- */
 
 function setupProfilePhoto() {
   const img = document.getElementById("profileImg");
   const fallback = document.getElementById("profileFallback");
   if (!img || !fallback) return;
-  
+
   img.addEventListener("error", () => {
     img.style.display = "none";
     fallback.style.display = "flex";
@@ -244,7 +346,7 @@ function setupProfilePhoto() {
 }
 
 /* ---------------------------------------------------------
-   6. SCROLL REVEAL
+   8. SCROLL REVEAL
 --------------------------------------------------------- */
 
 function setupScrollReveal() {
@@ -287,7 +389,7 @@ function animateCount(el) {
 }
 
 /* ---------------------------------------------------------
-   7. NAVBAR — scroll style + mobile toggle + active link
+   9. NAVBAR — scroll style + mobile toggle + active link
 --------------------------------------------------------- */
 
 function setupNavbar() {
@@ -330,17 +432,18 @@ function setupNavbar() {
 }
 
 /* ---------------------------------------------------------
-   8. INIT
+   10. INIT
 --------------------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", () => {
   renderSkills();
   renderProjects();
+  renderCertificates();
   renderSocials();
   setupProfilePhoto();
   setupNavbar();
   setupScrollReveal();
-  
+
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });

@@ -20,6 +20,7 @@
         <a href="#about" data-nav>Biodata</a>
         <a href="#skills" data-nav>Keahlian</a>
         <a href="#projects" data-nav>Proyek</a>
+        <a href="#certificates" data-nav>Sertifikat</a>
         <a href="#contact" data-nav>Kontak</a>
       </nav>
       <button class="navbar__toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
@@ -30,6 +31,7 @@
       <a href="#about" data-nav>Biodata</a>
       <a href="#skills" data-nav>Keahlian</a>
       <a href="#projects" data-nav>Proyek</a>
+      <a href="#certificates" data-nav>Sertifikat</a>
       <a href="#contact" data-nav>Kontak</a>
     </nav>
   </header>
@@ -43,7 +45,7 @@
 
         <div class="hero__card">
           <div class="hero__photo-wrap">
-            <img src="assets\images\Profile.jpg" alt="Foto profil Maximillian Mikhael" class="hero__photo" id="profileImg">
+            <img src="assets/images/Profile.jpg" alt="Foto profil Maximillian Mikhael" class="hero__photo" id="profileImg">
             <div class="hero__photo-fallback" id="profileFallback" aria-hidden="true">MM</div>
           </div>
 
@@ -127,8 +129,24 @@
       </div>
     </section>
 
+    <!-- ===== CERTIFICATES ===== -->
+    <section class="section" id="certificates">
+      <div class="section__inner reveal">
+        <p class="eyebrow">Bukti belajar saya</p>
+        <h2 class="section__title">Sertifikat</h2>
+        <p class="section__lead">
+          Sertifikat dan penghargaan yang pernah saya dapatkan dari pelatihan, kursus,
+          maupun perlombaan. Klik gambar untuk melihat versi penuhnya.
+        </p>
+
+        <div class="certificates-grid" id="certificatesGrid">
+          <!-- diisi oleh script.js -->
+        </div>
+      </div>
+    </section>
+
     <!-- ===== CONTACT ===== -->
-    <section class="section contact" id="contact">
+    <section class="section contact section--alt" id="contact">
       <div class="section__inner reveal">
         <p class="eyebrow">Mari terhubung</p>
         <h2 class="section__title">Kontak</h2>
@@ -171,6 +189,15 @@
     <p>&copy; <span id="year"></span> Maximillian Mikhael. Dibuat dengan rasa ingin tahu dan secangkir kopi.</p>
     <a href="#top" class="footer__top">Kembali ke atas ↑</a>
   </footer>
+
+  <!-- ===== LIGHTBOX SERTIFIKAT ===== -->
+  <div class="lightbox" id="certLightbox" aria-hidden="true">
+    <button class="lightbox__close" id="certLightboxClose" aria-label="Tutup">&times;</button>
+    <figure class="lightbox__content">
+      <img src="" alt="" id="certLightboxImg">
+      <figcaption id="certLightboxCaption"></figcaption>
+    </figure>
+  </div>
 
   <script src="script.js"></script>
 </body>
