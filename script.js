@@ -42,33 +42,42 @@ const SKILLS = [
 
 const PROJECTS = [
   {
-    title: "Lorem Ipsum Quest",
+    title: "Keturon",
+    subtitle: "Project Akhir SMK",
     type: "game",
     typeLabel: "Game",
-    mode: "solo",
-    desc: "Contoh deskripsi: game 2D singkat bertema teka-teki yang dibuat untuk belajar dasar mekanika gameplay dan level design."
-  },
-  {
-    title: "Portal Sekolah Digital",
-    type: "web",
-    typeLabel: "Web",
-    mode: "collab",
-    desc: "Contoh deskripsi: website informasi sekolah dengan sistem pengumuman dan galeri kegiatan, dikerjakan bersama 2 rekan tim."
-  },
-  {
-    title: "Ambient Loop Pack",
-    type: "audio",
-    typeLabel: "Audio",
-    mode: "solo",
-    desc: "Contoh deskripsi: kumpulan musik latar ambient pendek untuk kebutuhan game indie, dibuat sebagai latihan sound design."
-  },
-  {
-    title: "Tugas Akhir RPL",
-    type: "web",
-    typeLabel: "Web",
-    mode: "collab",
-    desc: "Contoh deskripsi: aplikasi manajemen data sederhana sebagai proyek akhir kelulusan SMK, dikerjakan berkelompok."
-  }
+    mode: "collabg",
+    image: "assets/images/project-submitted.png",
+    link: "https://github.com/username/submitted",
+    desc: "Proyek game pendek yang dikembangkan secara kolaboratif bersama Tim Tugas Akhir. Di sini, saya bertanggung jawab penuh atas implementasi logika program (programming) dan seluruh produksi audio."
+  }//,
+//   {
+//     title: "Portal Sekolah Digital",
+//     type: "web",
+//     typeLabel: "Web",
+//     mode: "collab",
+//     image: "assets/images/project-portal-sekolah.jpg",
+//     link: "https://github.com/username/portal-sekolah",
+//     desc: "Contoh deskripsi: website informasi sekolah dengan sistem pengumuman dan galeri kegiatan, dikerjakan bersama 2 rekan tim."
+//   },
+//   {
+//     title: "Ambient Loop Pack",
+//     type: "audio",
+//     typeLabel: "Audio",
+//     mode: "solo",
+//     image: "assets/images/project-ambient-loop.jpg",
+//     link: "https://soundcloud.com/username/sets/ambient-loop-pack",
+//     desc: "Contoh deskripsi: kumpulan musik latar ambient pendek untuk kebutuhan game indie, dibuat sebagai latihan sound design."
+//   },
+//   {
+//     title: "Tugas Akhir RPL",
+//     type: "web",
+//     typeLabel: "Web",
+//     mode: "collab",
+//     image: "assets/images/project-tugas-akhir.jpg",
+//     link: "https://github.com/username/tugas-akhir-rpl",
+//     desc: "Contoh deskripsi: aplikasi manajemen data sederhana sebagai proyek akhir kelulusan SMK, dikerjakan berkelompok."
+//   }
 ];
 
 const SOCIALS = [
@@ -105,6 +114,7 @@ const SOCIALS = [
 
 function renderSkills() {
   const grid = document.getElementById("skillsGrid");
+  if (!grid) return;
   grid.innerHTML = SKILLS.map((s, i) => `
     <div class="skill-card" style="transition-delay:${i * 40}ms">
       <div class="skill-card__head">
@@ -125,25 +135,65 @@ function renderSkills() {
    3. RENDER PROJECTS
 --------------------------------------------------------- */
 
+// Ditambahkan LINK_ICON eksternal agar badge "Lihat Proyek" tidak error
+const LINK_ICON = `<svg viewBox="0 0 24 24" fill="none" width="14" height="14" style="display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
 const MODE_ICON = {
   solo: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
-  collab: `<svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8" r="2.8" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="9" r="2.3" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19c0-3 2.3-5.2 5-5.2s5 2.2 5 5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14.5 14.3c2.2.2 3.8 1.9 3.8 4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`
+  collab: `<svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8" r="2.8" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="9" r="2.3" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19c0-3 2.3-5.2 5-5.2s5 2.2 5 5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14.5 14.3c2.2.2 3.8 1.9 3.8 4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+  // Ikon penunjang fallback thumbnail proyek berdasarkan tipenya
+  game: `<svg viewBox="0 0 24 24" fill="none"><path d="M7 9h2m-1-1v2m6-1h.01M17 9h.01M6 14h12a3 3 0 0 0 3-3V9a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2a3 3 0 0 0 3 3Z" stroke="currentColor" stroke-width="1.6"/><path d="M5 14l-1.2 5.4a1.5 1.5 0 0 0 2.6 1.3L8 18h8l1.6 2.7a1.5 1.5 0 0 0 2.6-1.3L19 14" stroke="currentColor" stroke-width="1.6"/></svg>`,
+  web: `<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4.5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 8.5h18" stroke="currentColor" stroke-width="1.6"/></svg>`,
+  audio: `<svg viewBox="0 0 24 24" fill="none"><path d="M9 18V6l9-2v12" stroke="currentColor" stroke-width="1.6"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.6"/><circle cx="15" cy="16" r="3" stroke="currentColor" stroke-width="1.6"/></svg>`
 };
 
 function renderProjects() {
   const grid = document.getElementById("projectsGrid");
-  grid.innerHTML = PROJECTS.map(p => `
-    <article class="project-card" data-type="${p.type}">
-      <div class="project-card__top">
-        <span class="project-card__type type-${p.type}">${p.typeLabel}</span>
-        <span class="project-card__mode">${MODE_ICON[p.mode]} ${p.mode === "solo" ? "Solo" : "Kolaborasi"}</span>
+  if (!grid) return;
+  
+  grid.innerHTML = PROJECTS.map((p, i) => {
+    const Tag = p.link ? "a" : "div";
+    const linkAttrs = p.link ? `href="${p.link}" target="_blank" rel="noopener noreferrer"` : "";
+    const imgId = `projectImg-${i}`;
+
+    return `
+    <${Tag} class="project-card" data-type="${p.type}" ${linkAttrs}>
+      <div class="project-card__thumb">
+        <img src="${p.image || ''}" alt="Thumbnail ${p.title}" id="${imgId}" loading="lazy">
+        <div class="project-card__thumb-fallback" data-fallback>
+          ${MODE_ICON[p.type] || ""}
+        </div>
+        ${p.link ? `<span class="project-card__link-badge">${LINK_ICON} Lihat Proyek</span>` : ""}
       </div>
-      <h3 class="project-card__title">${p.title}</h3>
-      <p class="project-card__desc">${p.desc}</p>
-    </article>
-  `).join("");
+      <div class="project-card__body">
+        <div class="project-card__top">
+          <span class="project-card__type type-${p.type}">${p.typeLabel}</span>
+          <span class="project-card__mode">${MODE_ICON[p.mode]} ${p.mode === "solo" ? "Solo" : "Kolaborasi"}</span>
+        </div>
+        <h3 class="project-card__title">${p.title}</h3>
+        ${p.subtitle ? `<p class="project-card__subtitle">${p.subtitle}</p>` : ""}
+        <p class="project-card__desc">${p.desc}</p>
+      </div>
+    </${Tag}>
+  `;
+  }).join("");
 
   setupFilter();
+  setupProjectThumbs();
+}
+
+function setupProjectThumbs() {
+  document.querySelectorAll(".project-card__thumb img").forEach(img => {
+    const showFallback = () => {
+      img.style.display = "none";
+      img.previousElementSibling?.classList?.add("is-shown");
+    };
+    if (!img.getAttribute("src")) {
+      showFallback();
+      return;
+    }
+    img.addEventListener("error", showFallback);
+  });
 }
 
 function setupFilter() {
@@ -170,6 +220,7 @@ function setupFilter() {
 
 function renderSocials() {
   const wrap = document.getElementById("socials");
+  if (!wrap) return;
   wrap.innerHTML = SOCIALS.map(s => `
     <a class="social-link" href="${s.url}" target="_blank" rel="noopener noreferrer">
       ${s.icon} ${s.name}
@@ -179,13 +230,13 @@ function renderSocials() {
 
 /* ---------------------------------------------------------
    5. PROFILE PHOTO FALLBACK
-   Jika assets/images/profile.jpg belum ada / gagal load,
-   tampilkan inisial sebagai pengganti foto.
 --------------------------------------------------------- */
 
 function setupProfilePhoto() {
   const img = document.getElementById("profileImg");
   const fallback = document.getElementById("profileFallback");
+  if (!img || !fallback) return;
+  
   img.addEventListener("error", () => {
     img.style.display = "none";
     fallback.style.display = "flex";
@@ -206,7 +257,6 @@ function setupScrollReveal() {
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
 
-        // Trigger skill bar fill + counting animation once skills section is visible
         if (entry.target.id === "skills" || entry.target.querySelector?.("#skillsGrid")) {
           skillBars.forEach(bar => {
             bar.style.width = bar.dataset.fill + "%";
@@ -246,6 +296,8 @@ function setupNavbar() {
   const mobileMenu = document.getElementById("navMobile");
   const navLinks = document.querySelectorAll("[data-nav]");
   const sections = document.querySelectorAll("main section[id]");
+
+  if (!navbar || !toggle || !mobileMenu) return;
 
   window.addEventListener("scroll", () => {
     navbar.classList.toggle("is-scrolled", window.scrollY > 8);
@@ -288,5 +340,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupProfilePhoto();
   setupNavbar();
   setupScrollReveal();
-  document.getElementById("year").textContent = new Date().getFullYear();
+  
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
