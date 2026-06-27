@@ -193,8 +193,15 @@
   <!-- ===== LIGHTBOX SERTIFIKAT ===== -->
   <div class="lightbox" id="certLightbox" aria-hidden="true">
     <button class="lightbox__close" id="certLightboxClose" aria-label="Tutup">&times;</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="certLightboxPrev" aria-label="Gambar sebelumnya">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="lightbox__nav lightbox__nav--next" id="certLightboxNext" aria-label="Gambar selanjutnya">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
     <figure class="lightbox__content">
       <img src="" alt="" id="certLightboxImg">
+      <span class="lightbox__counter" id="certLightboxCounter"></span>
       <figcaption id="certLightboxCaption"></figcaption>
     </figure>
   </div>

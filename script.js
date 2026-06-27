@@ -83,27 +83,29 @@ const PROJECTS = [
 
 /* Sertifikat — letakkan file gambar di assets/images/, lalu isi data di bawah.
    "issuer" = lembaga/penyelenggara, "year" = tahun didapat. Field "credentialUrl"
-   bersifat opsional: kalau diisi, akan muncul tombol "Verifikasi" di lightbox. */
+   bersifat opsional: kalau diisi, akan muncul tombol "Verifikasi" di lightbox.
+   "images" adalah ARRAY — isi 1 gambar saja kalau cuma satu, atau lebih dari 1
+   kalau mau bisa digeser kiri/kanan di lightbox (misal halaman depan & belakang). */
 const CERTIFICATES = [
   {
     title: "Sertifikat Praktik Kerja Lapangan",
     issuer: "Nama Perusahaan/Instansi PKL",
     year: "2026",
-    image: "assets/images/cert-pkl.jpg",
+    images: ["assets/images/Codingcamp20261.png", "assets/images/Codingcamp20262.png"],
     credentialUrl: ""
   },
   {
     title: "Sertifikat Kompetensi RPL",
     issuer: "Uji Kompetensi Keahlian (UKK) SMK",
     year: "2026",
-    image: "assets/images/cert-ukk-rpl.jpg",
+    images: ["assets/images/cert-ukk-rpl.jpg", "assets/images/cert-ukk-rpl-lampiran.jpg"],
     credentialUrl: ""
   },
   {
     title: "Sertifikat Pelatihan Game Development",
     issuer: "Nama Platform/Penyelenggara Kursus",
     year: "2025",
-    image: "assets/images/cert-game-dev.jpg",
+    images: ["assets/images/cert-game-dev.jpg"],
     credentialUrl: ""
   }
 ];
@@ -166,6 +168,10 @@ function renderSkills() {
 const LINK_ICON = `<svg viewBox="0 0 24 24" fill="none" width="14" height="14" style="display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 const ZOOM_ICON = `<svg viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.2 15.2 20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M10.5 8v5M8 10.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`;
+
+const STACK_ICON = `<svg viewBox="0 0 24 24" fill="none" width="12" height="12"><rect x="7" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 7v12a2 2 0 0 0 2 2h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+const ARROW_ICON = `<svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 const MODE_ICON = {
   solo: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
@@ -238,11 +244,15 @@ function renderCertificates() {
   const grid = document.getElementById("certificatesGrid");
   if (!grid) return;
 
-  grid.innerHTML = CERTIFICATES.map((c, i) => `
+  grid.innerHTML = CERTIFICATES.map((c, i) => {
+    const firstImg = c.images?.[0] || "";
+    const count = c.images?.length || 0;
+    return `
     <button type="button" class="cert-card" data-cert-index="${i}">
       <span class="cert-card__thumb">
-        <img src="${c.image || ''}" alt="Sertifikat ${c.title}" loading="lazy">
+        <img src="${firstImg}" alt="Sertifikat ${c.title}" loading="lazy">
         <span class="cert-card__thumb-fallback" data-fallback>${CERT_FALLBACK_ICON}</span>
+        ${count > 1 ? `<span class="cert-card__count">${STACK_ICON} ${count}</span>` : ""}
         <span class="cert-card__zoom-hint">${ZOOM_ICON} Perbesar</span>
       </span>
       <span class="cert-card__body">
@@ -251,7 +261,8 @@ function renderCertificates() {
         <span class="cert-card__year">${c.year}</span>
       </span>
     </button>
-  `).join("");
+  `;
+  }).join("");
 
   setupImageFallback(".cert-card__thumb img");
   setupCertLightbox();
@@ -262,14 +273,39 @@ function setupCertLightbox() {
   const img = document.getElementById("certLightboxImg");
   const caption = document.getElementById("certLightboxCaption");
   const closeBtn = document.getElementById("certLightboxClose");
+  const prevBtn = document.getElementById("certLightboxPrev");
+  const nextBtn = document.getElementById("certLightboxNext");
+  const counter = document.getElementById("certLightboxCounter");
   if (!lightbox || !img || !caption || !closeBtn) return;
 
-  function openLightbox(index) {
-    const c = CERTIFICATES[index];
+  let currentCertIndex = 0;
+  let currentImgIndex = 0;
+
+  function renderLightboxImage() {
+    const c = CERTIFICATES[currentCertIndex];
     if (!c) return;
-    img.src = c.image || "";
-    img.alt = `Sertifikat ${c.title}`;
+    const images = c.images || [];
+    const total = images.length;
+
+    img.src = images[currentImgIndex] || "";
+    img.alt = `Sertifikat ${c.title} (${currentImgIndex + 1}/${total})`;
     caption.textContent = `${c.title} — ${c.issuer} (${c.year})`;
+
+    const showNav = total > 1;
+    if (prevBtn) prevBtn.style.display = showNav ? "flex" : "none";
+    if (nextBtn) nextBtn.style.display = showNav ? "flex" : "none";
+    if (counter) {
+      counter.style.display = showNav ? "block" : "none";
+      counter.textContent = `${currentImgIndex + 1} / ${total}`;
+    }
+  }
+
+  function openLightbox(certIndex) {
+    const c = CERTIFICATES[certIndex];
+    if (!c) return;
+    currentCertIndex = certIndex;
+    currentImgIndex = 0;
+    renderLightboxImage();
     lightbox.classList.add("is-open");
     lightbox.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
@@ -281,6 +317,18 @@ function setupCertLightbox() {
     document.body.style.overflow = "";
   }
 
+  function goPrev() {
+    const total = CERTIFICATES[currentCertIndex]?.images?.length || 1;
+    currentImgIndex = (currentImgIndex - 1 + total) % total;
+    renderLightboxImage();
+  }
+
+  function goNext() {
+    const total = CERTIFICATES[currentCertIndex]?.images?.length || 1;
+    currentImgIndex = (currentImgIndex + 1) % total;
+    renderLightboxImage();
+  }
+
   document.querySelectorAll(".cert-card").forEach(card => {
     card.addEventListener("click", () => {
       const idx = parseInt(card.dataset.certIndex, 10);
@@ -289,11 +337,31 @@ function setupCertLightbox() {
   });
 
   closeBtn.addEventListener("click", closeLightbox);
+  prevBtn?.addEventListener("click", (e) => { e.stopPropagation(); goPrev(); });
+  nextBtn?.addEventListener("click", (e) => { e.stopPropagation(); goNext(); });
+
   lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox) closeLightbox();
   });
+
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && lightbox.classList.contains("is-open")) closeLightbox();
+    if (!lightbox.classList.contains("is-open")) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") goPrev();
+    if (e.key === "ArrowRight") goNext();
+  });
+
+  // Swipe geser di mobile/touch
+  let touchStartX = 0;
+  lightbox.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  lightbox.addEventListener("touchend", (e) => {
+    const touchEndX = e.changedTouches[0].screenX;
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) < 40) return;
+    if (diff > 0) goPrev();
+    else goNext();
   });
 }
 

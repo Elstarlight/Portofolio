@@ -761,6 +761,23 @@ button { font-family: inherit; }
   opacity: 0.4;
 }
 
+.cert-card__count {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(28, 27, 26, 0.85);
+  backdrop-filter: blur(4px);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  padding: 5px 9px;
+  border-radius: 100px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .cert-card__zoom-hint {
   position: absolute;
   bottom: 12px;
@@ -883,6 +900,50 @@ button { font-family: inherit; }
 .lightbox__close:hover {
   background: rgba(255,255,255,0.18);
   transform: scale(1.06);
+}
+
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.08);
+  color: var(--bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s var(--ease), transform .2s var(--ease);
+}
+.lightbox__nav svg { width: 22px; height: 22px; }
+.lightbox__nav:hover {
+  background: rgba(255,255,255,0.18);
+}
+.lightbox__nav--prev {
+  left: 18px;
+  transform: translateY(-50%);
+}
+.lightbox__nav--prev:hover { transform: translateY(-50%) translateX(-2px); }
+.lightbox__nav--next {
+  right: 18px;
+}
+.lightbox__nav--next:hover { transform: translateY(-50%) translateX(2px); }
+
+.lightbox__counter {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--bg);
+  opacity: 0.7;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 600px) {
+  .lightbox__nav { width: 40px; height: 40px; }
+  .lightbox__nav--prev { left: 8px; }
+  .lightbox__nav--next { right: 8px; }
 }
 
 /* =========================================================
